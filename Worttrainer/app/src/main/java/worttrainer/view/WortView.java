@@ -21,6 +21,8 @@ public class WortView extends JPanel {
     private JTextField textField = new JTextField();
     private int richtig = 0;
     private int gesamt = 0;
+    private int random = 0;
+
 
     public WortView(WortController controller) throws IOException {
         this.controller = controller;
@@ -99,6 +101,10 @@ public class WortView extends JPanel {
         label[5].setText(""+richtig);
     }
 
+    public void setRandom(int random) {
+        this.random = random;
+    }
+
     //GETTER-METHODEN
 
     /**
@@ -116,4 +122,9 @@ public class WortView extends JPanel {
     public int getRichtig() {
         return Integer.parseInt(label[3].getText());
     }
+
+    public int getRandom() {
+        return random;
+    }
+
 }
