@@ -49,9 +49,7 @@ public class WortController implements ActionListener {
         frame = new WortFrame("WortTrainer", view);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object o = e.getActionCommand();
+    public void actionPerformed(String o) {
         this.random = view.getRandom();
         if (o.equals("input")) {
             trainer.selectWortEintrag(random);
@@ -122,7 +120,76 @@ public class WortController implements ActionListener {
             }
         }
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.actionPerformed(e.getActionCommand());
+    }
     public int createRandom(){
         return rand.nextInt(liste.getwEintrag().length);
+    }
+
+    public WortView getView() {
+        return view;
+    }
+
+    public void setView(WortView view) {
+        this.view = view;
+    }
+
+    public WortFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(WortFrame frame) {
+        this.frame = frame;
+    }
+
+    public WortEintrag getEintrag() {
+        return eintrag;
+    }
+
+    public void setEintrag(WortEintrag eintrag) {
+        this.eintrag = eintrag;
+    }
+
+    public WortListe getListe() {
+        return liste;
+    }
+
+    public void setListe(WortListe liste) {
+        this.liste = liste;
+    }
+
+    public WortTrainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(WortTrainer trainer) {
+        this.trainer = trainer;
+    }
+
+    public WortTrainerSpeichernImpl getSaveMe() {
+        return saveMe;
+    }
+
+    public void setSaveMe(WortTrainerSpeichernImpl saveMe) {
+        this.saveMe = saveMe;
+    }
+
+    public int getRandom() {
+        return random;
+    }
+
+    public void setRandom(int random) {
+        this.random = random;
+    }
+
+    public Random getRand() {
+        return rand;
+    }
+
+    public void setRand(Random rand) {
+        this.rand = rand;
     }
 }

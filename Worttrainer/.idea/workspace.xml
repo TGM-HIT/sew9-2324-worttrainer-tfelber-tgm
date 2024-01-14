@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56b6d006-5ccd-463a-94b9-3ba906d04c4d" name="Changes" comment="UML for Persistence">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/worttrainer/model/WortTrainerSpeichernImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/worttrainer/model/WortTrainerSpeichernSQLite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/worttrainer/model/WortTrainerSpeichernText.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.db" afterDir="false" />
+    <list default="true" id="56b6d006-5ccd-463a-94b9-3ba906d04c4d" name="Changes" comment="implementation Persistence">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/worttrainer/controller/WortController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/worttrainer/controller/WortController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/worttrainer/view/WortView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/worttrainer/view/WortView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/worttrainer/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/worttrainer/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +73,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Gradle.AppTest.AttemptRightChoice.executor": "Run",
+    "Gradle.AppTest.executor": "Run",
+    "Gradle.AppTest.loadDateText.executor": "Run",
+    "Gradle.AppTest.reset.executor": "Run",
+    "Gradle.AppTest.saveData.executor": "Run",
+    "Gradle.AppTest.testActionPerformedAdd.executor": "Run",
+    "Gradle.AppTest.testActionPerformedInput.executor": "Run",
+    "Gradle.AppTest.testActionPerformedLoad.executor": "Run",
+    "Gradle.AppTest.testActionPerformedReset.executor": "Run",
     "Gradle.Worttrainer [:App.main()].executor": "Run",
     "Gradle.Worttrainer [run].executor": "Run",
     "Gradle.Worttrainer:app [:app:App.main()].executor": "Run",
@@ -97,82 +101,134 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.WortController">
-    <configuration name="App (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="worttrainer.App" />
-      <module name="Worttrainer.app.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="worttrainer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="worttrainer.App" />
-      <module name="Worttrainer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="worttrainer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Worttrainer" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WortController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="worttrainer.controller.WortController" />
-      <module name="Worttrainer.app.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="worttrainer.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Worttrainer [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.AppTest">
+    <configuration name="AppTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="run" />
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;worttrainer.AppTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppTest.testActionPerformedInput" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;worttrainer.AppTest.testActionPerformedInput&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppTest.testActionPerformedLoad" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;worttrainer.AppTest.testActionPerformedLoad&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppTest.testActionPerformedReset" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;worttrainer.AppTest.testActionPerformedReset&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AppTest.testActionPerformedRightInput" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;worttrainer.AppTest.testActionPerformedRightInput&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.WortController" />
-        <item itemvalue="Gradle.Worttrainer [run]" />
-        <item itemvalue="Application.App (1)" />
-        <item itemvalue="Application.App" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.AppTest" />
+        <item itemvalue="Gradle.AppTest.testActionPerformedRightInput" />
+        <item itemvalue="Gradle.AppTest.testActionPerformedInput" />
+        <item itemvalue="Gradle.AppTest.testActionPerformedReset" />
+        <item itemvalue="Gradle.AppTest.testActionPerformedLoad" />
       </list>
     </recent_temporary>
   </component>
@@ -191,7 +247,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705242795004</updated>
-      <workItem from="1705242796018" duration="10785000" />
+      <workItem from="1705242796018" duration="14808000" />
     </task>
     <task id="LOCAL-00001" summary="added UML for GUI">
       <option name="closed" value="true" />
@@ -233,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705254667710</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="implementation Persistence">
+      <option name="closed" value="true" />
+      <created>1705257877105</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705257877105</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +309,7 @@
     <MESSAGE value="updated UML for adding model" />
     <MESSAGE value="implementation of model" />
     <MESSAGE value="UML for Persistence" />
-    <option name="LAST_COMMIT_MESSAGE" value="UML for Persistence" />
+    <MESSAGE value="implementation Persistence" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementation Persistence" />
   </component>
 </project>

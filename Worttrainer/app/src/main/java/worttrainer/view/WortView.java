@@ -127,4 +127,7 @@ public class WortView extends JPanel {
         return random;
     }
 
+    public void setTextField(String input) {
+        textField.setText(input);
+    }
 }
