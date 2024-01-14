@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.util.Random;
 
 /**
@@ -24,6 +25,7 @@ public class WortController implements ActionListener {
     private WortEintrag eintrag;
     private WortListe liste;
     private WortTrainer trainer;
+    private WortTrainerSpeichernImpl saveMe;
 
     private int random;
     Random rand = new Random();
@@ -41,8 +43,8 @@ public class WortController implements ActionListener {
         trainer = new WortTrainer(liste);
         //View
         view = new WortView(this);
-        // Test random pic
-        view.newPic("https://live.staticflickr.com/3919/14172677717_32f107831e_b.jpg");
+        view.setRandom(createRandom());
+        view.newPic((liste.giveWortEintrag(view.getRandom()).getsURL()));
         // create frame
         frame = new WortFrame("WortTrainer", view);
     }
@@ -81,6 +83,43 @@ public class WortController implements ActionListener {
                     JOptionPane.showInputDialog(null, "Geben sie einen Namen ein"),
                     JOptionPane.showInputDialog(null, "Geben sie eine URL ein")
             );
+        }else if(o.equals("load")){
+            try {
+                String input = JOptionPane.showInputDialog(null, "Welche Datei soll geladen werden?");
+                if(input.endsWith(".txt")){
+                    this.saveMe = new WortTrainerSpeichernText();
+                } else if(input.endsWith(".db") || input.endsWith(".sqlite3") ||input.endsWith(".sqlite") ||input.endsWith(".db3")){
+                    this.saveMe = new WortTrainerSpeichernSQLite();
+                } else {
+                    System.err.println("Datentyp ist nicht implementiert");
+                }
+                trainer = saveMe.load(input);
+                view.setRichtig(trainer.getAbgefragteW());
+                view.setGesamt(trainer.getGeloesteW());
+                trainer.setAbgefragteW(trainer.getAbgefragteW()-1);
+                trainer.setGeloesteW(trainer.getGeloesteW()-1);
+
+            } catch (IOException | ClassNotFoundException | SQLException exception ) {
+                exception.printStackTrace();
+            }
+        } else if(o.equals("save")){
+            try {
+                String input = JOptionPane.showInputDialog(null, "Wie soll die Datei heißen?");
+                if(input.endsWith(".txt")){
+                    this.saveMe = new WortTrainerSpeichernText();
+                } else if(input.endsWith(".db") || input.endsWith(".sqlite3") ||input.endsWith(".sqlite") ||input.endsWith(".db3")){
+                    this.saveMe = new WortTrainerSpeichernSQLite();
+                } else {
+                    System.err.println("Datentyp ist nicht implementiert");
+                }
+                trainer.setAbgefragteW(view.getGesamt());
+                trainer.setGeloesteW(view.getRichtig());
+                saveMe.save(input, trainer);
+                trainer.setAbgefragteW(view.getGesamt()-1);
+                trainer.setGeloesteW(view.getRichtig()-1);
+            } catch (IOException | ClassNotFoundException | SQLException exception ) {
+                exception.printStackTrace();
+            }
         }
     }
     public int createRandom(){
