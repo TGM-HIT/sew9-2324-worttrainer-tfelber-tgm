@@ -47,28 +47,41 @@ public class WortController implements ActionListener {
         view.newPic((liste.giveWortEintrag(view.getRandom()).getsURL()));
         // create frame
         frame = new WortFrame("WortTrainer", view);
+        try {
+            String input = "default.txt";
+            this.saveMe = new WortTrainerSpeichernText();
+            trainer = saveMe.load(input);
+            view.setRichtig(trainer.getAbgefragteW());
+            view.setGesamt(trainer.getGeloesteW());
+            trainer.setAbgefragteW(trainer.getAbgefragteW()-1);
+            trainer.setGeloesteW(trainer.getGeloesteW()-1);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void actionPerformed(String o) {
         this.random = view.getRandom();
         if (o.equals("input")) {
             trainer.selectWortEintrag(random);
-            if (trainer.check(view.getTextField())) {
-                view.correct(trainer.getGeloesteW(), trainer.getAbgefragteW());
-                view.setRandom(createRandom());
-                random = view.getRandom();
-                trainer.selectWortEintrag(random);
-                try {
-                    view.newPic((liste.giveWortEintrag(random).getsURL()));
-                } catch (MalformedURLException malformedURLException) {
-                    malformedURLException.printStackTrace();
-                }
-            } else {
-                view.incorrect(trainer.getGeloesteW() + 1, trainer.getAbgefragteW());
-                try {
-                    view.newPic((liste.giveWortEintrag(random).getsURL()));
-                } catch (MalformedURLException malformedURLException) {
-                    malformedURLException.printStackTrace();
+            if(!view.getTextField().isEmpty()) {
+                if (trainer.check(view.getTextField())) {
+                    view.correct(trainer.getGeloesteW(), trainer.getAbgefragteW());
+                    view.setRandom(createRandom());
+                    random = view.getRandom();
+                    trainer.selectWortEintrag(random);
+                    try {
+                        view.newPic((liste.giveWortEintrag(random).getsURL()));
+                    } catch (MalformedURLException malformedURLException) {
+                        malformedURLException.printStackTrace();
+                    }
+                } else {
+                    view.incorrect(trainer.getGeloesteW() + 1, trainer.getAbgefragteW());
+                    try {
+                        view.newPic((liste.giveWortEintrag(random).getsURL()));
+                    } catch (MalformedURLException malformedURLException) {
+                        malformedURLException.printStackTrace();
+                    }
                 }
             }
         } else if (o.equals("reset")) {
@@ -77,11 +90,16 @@ public class WortController implements ActionListener {
             view.setRichtig(0);
             trainer.setAbgefragteW(-1);
         } else if (o.equals("add")) {
-            liste.addWortEintrag(
-                    JOptionPane.showInputDialog(null, "Geben sie einen Namen ein"),
-                    JOptionPane.showInputDialog(null, "Geben sie eine URL ein")
-            );
-        }else if(o.equals("load")){
+            try{
+                liste.addWortEintrag(
+                        JOptionPane.showInputDialog(null, "Geben sie einen Namen ein"),
+                        JOptionPane.showInputDialog(null, "Geben sie eine URL ein")
+                );
+                trainer.setwListe(liste);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        } else if(o.equals("load")){
             try {
                 String input = JOptionPane.showInputDialog(null, "Welche Datei soll geladen werden?");
                 if(input.endsWith(".txt")){
@@ -118,6 +136,17 @@ public class WortController implements ActionListener {
             } catch (IOException | ClassNotFoundException | SQLException exception ) {
                 exception.printStackTrace();
             }
+        }
+        try {
+            String input = "default.txt";
+            this.saveMe = new WortTrainerSpeichernText();
+            trainer.setAbgefragteW(view.getGesamt());
+            trainer.setGeloesteW(view.getRichtig());
+            saveMe.save(input, trainer);
+            trainer.setAbgefragteW(view.getGesamt()-1);
+            trainer.setGeloesteW(view.getRichtig()-1);
+        } catch (IOException exception ) {
+            exception.printStackTrace();
         }
     }
 

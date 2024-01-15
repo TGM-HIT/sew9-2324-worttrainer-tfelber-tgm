@@ -23,7 +23,7 @@ public class WortTrainerSpeichernText implements WortTrainerSpeichernImpl {
         String save = "";
         try {
             outStream = new PrintWriter(file);
-            for (int i = 0; i < ((wTrainer.getwListe().getwEintrag()).length); ++i) {
+            for (int i = 0; i < ((wTrainer.getwListe().getwEintrag()).length); i++) {
                 save += wTrainer.getWortEintrag(i).getWord()+"\n"+wTrainer.getWortEintrag(i).getsURL()+"\n\n";
             }
             save += wTrainer.getAbgefragteW()+"\n"+wTrainer.getGeloesteW();

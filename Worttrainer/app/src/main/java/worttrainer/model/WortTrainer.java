@@ -107,4 +107,8 @@ public class WortTrainer {
     public WortListe getwListe() {
         return wListe;
     }
+
+    public void setwListe(WortListe wListe) {
+        this.wListe = wListe;
+    }
 }

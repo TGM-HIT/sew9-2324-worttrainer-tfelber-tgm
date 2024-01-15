@@ -25,6 +25,8 @@ dependencies {
     implementation(libs.guava)
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
     implementation("org.xerial:sqlite-jdbc:3.44.1.0")
+    implementation("org.slf4j:slf4j-simple:1.7.36")
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

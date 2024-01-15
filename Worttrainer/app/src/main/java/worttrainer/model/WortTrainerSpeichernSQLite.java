@@ -54,14 +54,17 @@ public class WortTrainerSpeichernSQLite implements WortTrainerSpeichernImpl {
             database = DriverManager.getConnection("jdbc:sqlite:"+name);
             statement = database.prepareStatement("SELECT word, url, anzahlAbgefragt, anzahlRichtig FROM worttrainer");
             ResultSet resultSet = statement.executeQuery();
+            int ab=0, ri=0;
             while (resultSet.next()) {
                 liste.addWortEintrag(new WortEintrag(resultSet.getString("word"), resultSet.getString("url")));
+                ab = resultSet.getInt("anzahlAbgefragt");
+                ri = resultSet.getInt("anzahlRichtig");
             }
 
             // Worttrainer erstellen
             WortTrainer trainer = new WortTrainer(liste);
-            trainer.setAbgefragteW(resultSet.getInt("anzahlAbgefragt"));
-            trainer.setGeloesteW(resultSet.getInt("anzahlRichtig"));
+            trainer.setAbgefragteW(ab);
+            trainer.setGeloesteW(ri);
             return trainer;
         } catch (SQLException e) {
             throw new RuntimeException(e);
